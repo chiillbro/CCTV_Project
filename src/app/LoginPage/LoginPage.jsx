@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router";
 import { logos } from "../../constants";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submit");
+    navigate("/dashboard");
+  };
   return (
     <div
       className={`flex items-center justify-center h-screen w-full  gap-10 relative overflow-hidden`}
@@ -14,18 +22,13 @@ const LoginPage = () => {
         <img
           src={logos.goldBars}
           alt="logo"
-          className="w-[100vw] h-[30vh] absolute bottom-[1px] left-[1px]   object-cover   rounded-md"
+          className="w-[100vw] h-[30vh] absolute bottom-[1px] left-[1px] object-cover opacity-50 rounded-md"
         />
       </div>
       <div className="h-[70vh] w-[20vw] ml-[30vw] flex gap-10 flex-col ">
-        <div>
-          <h1 className=" text-2xl">Log In</h1>
-        </div>
-        <form
-          // onSubmit={handleSubmit}
+        <h1 className=" text-2xl">Log In</h1>
 
-          className="flex flex-col gap-4 w-full"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
           <div className="w-full flex flex-col gap-2">
             <label htmlFor="email">Email</label>
             <input
@@ -45,7 +48,7 @@ const LoginPage = () => {
             />
           </div>
 
-          <button className="btn btn-neutral mt-10">Login</button>
+          <button className="btn btn-neutral mt-6">Login</button>
         </form>
       </div>
     </div>
