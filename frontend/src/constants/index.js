@@ -1,8 +1,8 @@
 import database from "../assets/database.png";
 
-import AboutLogo from "../assets/AboutLogo.jpg";
+import aboutLogo from "../assets/AboutLogo.jpg";
 
-import AtticaLogo from "../assets/attica-gold-company-logo.jpg";
+import atticaLogo from "../assets/attica-gold-company-logo.jpg";
 
 import documentation from "../assets/documentation.png";
 
@@ -11,8 +11,8 @@ import goldBars from "../assets/gold_bars.jpg";
 
 export const logos = {
   database,
-  aboutLogo: AboutLogo,
-  atticaLogo: AtticaLogo,
+  aboutLogo,
+  atticaLogo,
   documentation,
   background,
   goldBars,
