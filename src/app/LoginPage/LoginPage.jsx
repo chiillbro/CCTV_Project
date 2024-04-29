@@ -1,5 +1,55 @@
+import { logos } from "../../constants";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <div
+      className={`flex items-center justify-center h-screen w-full  gap-10 relative overflow-hidden`}
+    >
+      <div>
+        <img
+          src={logos.atticaLogo}
+          alt="logo"
+          className="w-[300px] lg:w-[400px] xl:w-[500px] absolute top-[200px] left-[10%] "
+        />
+        <img
+          src={logos.goldBars}
+          alt="logo"
+          className="w-[100vw] h-[30vh] absolute bottom-[1px] left-[1px]   object-cover   rounded-md"
+        />
+      </div>
+      <div className="h-[70vh] w-[20vw] ml-[30vw] flex gap-10 flex-col ">
+        <div>
+          <h1 className=" text-2xl">Log In</h1>
+        </div>
+        <form
+          // onSubmit={handleSubmit}
+
+          className="flex flex-col gap-4 w-full"
+        >
+          <div className="w-full flex flex-col gap-2">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              className="w-full  rounded-md p-2 text-black"
+            />
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your Password"
+              className="w-full rounded-md p-2 text-black"
+            />
+          </div>
+
+          <button className="btn btn-neutral mt-10">Login</button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;
