@@ -1,13 +1,53 @@
 import { useNavigate } from "react-router";
 import { logos } from "../../constants";
+// import { useEffect, useState } from "react";
+
+// import { useSelector } from "react-redux";
+import { useRegisterMutation } from "../../redux/api/usersApi";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const RegisterAgent = () => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // const {userInfo} = useSelector((state) => state.auth);
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  // useEffect(() => {
+
+  //   if (userInfo) {
+  //     navigate('/login')
+  //   }
+  // }, [navigate, userInfo])
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit");
-    navigate("/dashboard");
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+    } else {
+      try {
+        await register({
+          email,
+          username,
+          employeeId,
+          password,
+          confirmPassword,
+        });
+        navigate("/dashboard");
+        toast.success("Registration successful");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.data?.message || error.message);
+      }
+    }
   };
   return (
     <div
@@ -19,11 +59,6 @@ const RegisterAgent = () => {
           alt="logo"
           className="w-[300px] lg:w-[400px] xl:w-[500px] absolute top-[200px] left-[10%] "
         />
-        {/* <img
-          src={logos.goldBars}
-          alt="logo"
-          className="w-[100vw] h-[30vh] absolute bottom-[1px] left-[1px] object-cover opacity-50 rounded-md"
-        /> */}
       </div>
       <div className="h-[80vh] w-[20vw] ml-[30vw] flex gap-6 flex-col ">
         <h1 className=" text-2xl">Register</h1>
@@ -34,6 +69,8 @@ const RegisterAgent = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               // placeholder="Enter your email"
               className="w-full  rounded-md p-2 text-black"
             />
@@ -43,6 +80,8 @@ const RegisterAgent = () => {
             <input
               type="text"
               id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               // placeholder="Enter your username"
               className="w-full  rounded-md p-2 text-black"
             />
@@ -52,6 +91,8 @@ const RegisterAgent = () => {
             <input
               type="text"
               id="employeeId"
+              value={employeeId}
+              onChange={(e) => setEmployeeId(e.target.value)}
               // placeholder="Enter your employeeId"
               className="w-full  rounded-md p-2 text-black"
             />
@@ -61,6 +102,8 @@ const RegisterAgent = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               // placeholder="Enter your Password"
               className="w-full rounded-md p-2 text-black"
             />
@@ -70,12 +113,16 @@ const RegisterAgent = () => {
             <input
               type="password"
               id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               // placeholder="Re-enter your Password"
               className="w-full rounded-md p-2 text-black"
             />
           </div>
 
-          <button className="btn btn-neutral mt-4">Register</button>
+          <button className="btn btn-neutral mt-4">
+            {isLoading ? "Registering..." : "Register"}
+          </button>
         </form>
       </div>
     </div>

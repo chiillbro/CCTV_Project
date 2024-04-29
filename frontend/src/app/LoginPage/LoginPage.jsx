@@ -1,13 +1,47 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+
+import { useSelector, useDispatch } from "react-redux";
 import { logos } from "../../constants";
+import { useEffect, useState } from "react";
+import { useLoginMutation } from "../../redux/api/usersApi";
+import { setCredentials } from "../../redux/features/auth/authSlice";
+
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { search } = useLocation();
+
+  const sp = new URLSearchParams(search);
+
+  const redirect = sp.get("redirect") || "/dashboard";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, userInfo, redirect]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit");
-    navigate("/dashboard");
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
+      toast.success("Login successful");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.data?.message || error.message);
+    }
   };
   return (
     <div
@@ -34,6 +68,8 @@ const LoginPage = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full  rounded-md p-2 text-black"
             />
@@ -43,12 +79,16 @@ const LoginPage = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your Password"
               className="w-full rounded-md p-2 text-black"
             />
           </div>
 
-          <button className="btn btn-neutral mt-6">Login</button>
+          <button className="btn btn-neutral mt-6">
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
         </form>
       </div>
     </div>
