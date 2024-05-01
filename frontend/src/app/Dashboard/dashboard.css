@@ -1,0 +1,4 @@
+.child {
+  /* Apply Tailwind CSS utility classes using @apply */
+  @apply max-lg:w-[100px] max-lg:h-[130px] max-lg:p-[7px] max-lg:text-[13px] lg:w-[150px] lg:h-[180px] border-[1px] p-[10px] rounded-md flex items-center justify-between flex-col;
+}
