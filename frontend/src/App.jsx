@@ -5,6 +5,7 @@ import RegisterAgent from "./app/RegisterAgent/RegisterAgent";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Crm from "./app/Dashboard/CRM/Crm";
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
           <Route path="/" element={<LoginPage />} />
 
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/crm" element={<Crm />} />
+
           <Route path="/register" element={<RegisterAgent />} />
         </Routes>
       </BrowserRouter>

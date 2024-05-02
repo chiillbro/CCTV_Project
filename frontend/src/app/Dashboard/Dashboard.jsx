@@ -4,15 +4,23 @@ import img3 from "../../assets/homepageicon/database.jpg";
 import img4 from "../../assets/homepageicon/face_scanning.jpg";
 import img5 from "../../assets/homepageicon/register.png";
 import Navbar from "../Navbar/Navbar";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/dashboard/crm");
+  };
   return (
     <div className="h-screen w-screen">
-      <Navbar/>
+      <Navbar />
 
       <div className="width-full h-full grid md: grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
-        <div className="lg:w-[150px] lg:h-[200px] md md:h-150px">
+        <div
+          onClick={handleClick}
+          className="lg:w-[150px] lg:h-[200px] md md:h-150px"
+        >
           <img src={img1} alt="CRM" className="overflow-hidden" />
           <span className="">CRM</span>
         </div>
