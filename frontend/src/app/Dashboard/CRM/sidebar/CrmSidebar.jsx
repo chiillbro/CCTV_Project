@@ -80,9 +80,7 @@ const CrmSidebar = () => {
           </div>
         </div>
         {/* Sidebar Tabs components */}
-        <div
-          className={`absolute top-[100px] left-[350px] w-[75rem] h-[100px]  `}
-        >
+        <div className={`absolute top-[100px] left-[350px]   `}>
           {activeTab === "dashboard" && <CrmDashboard />}
           {activeTab === "customers" && <CrmCustomers />}
           {activeTab === "transactions" && <CrmTransactions />}
