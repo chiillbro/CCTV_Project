@@ -18,7 +18,7 @@ const Dashboard = () => {
             <img src={img1} alt="CRM" className="rounded-md" />
             <span className="">CRM</span>
           </Link>
-          <Link to="" className="child">
+          <Link tos="" className="child">
             <img src={img2} alt="CRM" className="rounded-md"/>
             <span className="">Live Stream</span>
           </Link>

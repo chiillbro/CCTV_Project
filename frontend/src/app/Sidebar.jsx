@@ -13,7 +13,7 @@ const Sidebar = () => {
   return (
     <div
       className={`
-      flex flex-col justify-items-start  h-screen  pt-[15px] gap-[40px] bg-[#279DE1] w-[60px]
+      flex flex-col justify-items-start  h-screen  pt-[15px] gap-[40px] bg-[#279DE1]
       ${hamburgerClicked ? 'w-[200px]' : 'w-[60px]'}`
       }
     >

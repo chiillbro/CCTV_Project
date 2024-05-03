@@ -4,6 +4,9 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import RegisterAgent from "./app/RegisterAgent/RegisterAgent";
 import Sidebar from "./app/Sidebar";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   return (
     <BrowserRouter>
