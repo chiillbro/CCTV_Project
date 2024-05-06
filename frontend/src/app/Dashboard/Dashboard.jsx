@@ -6,14 +6,9 @@ import img5 from "../../assets/homepageicon/register.png";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import './dashboard.css'
-// import { useNavigate } from "react-router";
 
 const Dashboard = () => {
-  // const navigate = useNavigate();
-
-  // const handleClick = () => {
-  //   navigate("/dashboard/crm");
-  // };
+  
   return (
     <div className="h-screen w-screen">
       <Navbar />

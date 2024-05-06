@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { BiCameraHome } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
 import { MdLiveTv } from "react-icons/md";
@@ -29,22 +29,17 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col gap-[15px]">
-          <div
-            className="flex justify-items-start gap-[20px] items-center ml-[10px] hover:bg-gray-700 p-[10px]"
+          <Link 
+          className="flex justify-items-start gap-[20px] items-center ml-[10px] hover:bg-gray-700 p-[10px]"
+          to="/dashboard/live-stream"
           >
             <BiCameraHome
               className="text-[22px] "
             />
             {hamburgerClicked && <span className="text-1xl ">Home</span>}
-          </div>
-          <div
-            className="flex justify-items-start gap-[20px] items-center ml-[10px]  hover:bg-gray-700 p-[10px]"
-          >
-            <MdDashboard className="text-[22px]" />
-            {hamburgerClicked && <span className="text-1xl ">Dashboard</span>}
-          </div>
+          </Link>
           <Link
-          to="/dashboard/live-stream/stream"
+            to="/dashboard/live-stream/stream"
             className="flex justify-items-start gap-[20px] items-center ml-[10px]  hover:bg-gray-700 p-[10px]"
           >
             <MdLiveTv className="text-[22px]" />
