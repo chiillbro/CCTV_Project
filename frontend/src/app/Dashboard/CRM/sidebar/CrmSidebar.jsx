@@ -31,11 +31,11 @@ const CrmSidebar = () => {
       <div className=" flex flex-col w-full relative ">
         {/* Logo or Branding of Dashboard Item */}
 
-        <div className="flex items-center   w-full bg-gray-800 h-20 justify-start pl-[6rem]   border-b border-gray-700">
+        <div className="flex items-center   w-full bg-gray-800 h-20 justify-start pl-[6rem]   border-b border-gray-700 ">
           <SiCivicrm className="w-6 h-6 mr-2 text-[#FF00FF]" />
           <span className="text-2xl text-[#00FFFF]"> CRM</span>
           <input
-            className="ml-[300px] w-[500px] rounded-md p-1 text-black"
+            className="ml-[300px] w-[500px] rounded-md p-1 outline-none text-black"
             type="text"
             placeholder="Search customers"
           />
@@ -46,7 +46,7 @@ const CrmSidebar = () => {
           {/* Dashboard Tab */}
           <div
             onClick={() => handleClick("dashboard")}
-            className="py-2 px-4 ml-11 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
+            className="py-2  pl-16 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
           >
             <MdDashboardCustomize className="w-6 h-6 mr-2" />
             Dashboard
@@ -55,7 +55,7 @@ const CrmSidebar = () => {
           {/* Customers Tab */}
           <div
             onClick={() => handleClick("customers")}
-            className="py-2 px-4 ml-11 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
+            className="py-2 pl-16 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
           >
             <FaUsers className="w-6 h-6 mr-2" />
             Customers
@@ -64,7 +64,7 @@ const CrmSidebar = () => {
           {/* Transactions Tab */}
           <div
             onClick={() => handleClick("transactions")}
-            className="py-2 px-4 ml-11 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
+            className="py-2 pl-16 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
           >
             <GrTransaction className="w-6 h-6 mr-2" />
             Transactions
@@ -73,16 +73,14 @@ const CrmSidebar = () => {
           {/* Settings Tab */}
           <div
             onClick={() => handleClick("settings")}
-            className="py-2 px-4 ml-11 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
+            className="py-2 pl-16 flex items-center justify-start hover:bg-gray-700 cursor-pointer"
           >
             <FiSettings className="w-6 h-6 mr-2" />
             Settings
           </div>
         </div>
         {/* Sidebar Tabs components */}
-        <div
-          className={`absolute top-[100px] left-[350px] w-[75rem] h-[100px]  `}
-        >
+        <div className={`absolute top-[100px] left-[350px]   `}>
           {activeTab === "dashboard" && <CrmDashboard />}
           {activeTab === "customers" && <CrmCustomers />}
           {activeTab === "transactions" && <CrmTransactions />}
