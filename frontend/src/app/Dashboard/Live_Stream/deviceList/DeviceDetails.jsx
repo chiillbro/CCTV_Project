@@ -1,0 +1,48 @@
+const DeviceDetails = [
+  {
+    no: 1,
+    deviceName: "Ezviz Camera",
+    state:"KA",
+    type: "DVR",
+    ip: "192.168.10.132",
+    model: "C6N",
+    port:"8000",
+    sn: "CA001",
+    onlineStatus: "Online",
+  },
+  {
+    no: 2,
+    deviceName: "Ezviz Camera",
+    state:"KA",
+    type: "DVR",
+    ip: "192.168.10.132",
+    model: "C6N",
+    port:"8000",
+    sn: "CA001",
+    onlineStatus: "Online",
+  },
+  {
+    no: 3,
+    deviceName: "Ezviz Camera",
+    state:"KA",
+    type: "DVR",
+    ip: "192.168.10.132",
+    model: "C6N",
+    port:"8000",
+    sn: "CA001",
+    onlineStatus: "Online",
+  },
+  {
+    no: 4,
+    deviceName: "Ezviz Camera",
+    state:"KA",
+    type: "DVR",
+    ip: "192.168.10.132",
+    model: "C6N",
+    port:"8000",
+    sn: "CA001",
+    onlineStatus: "Online",
+  },
+]
+
+export default DeviceDetails;

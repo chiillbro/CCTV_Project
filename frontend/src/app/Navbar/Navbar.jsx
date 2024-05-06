@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between h-[8vh] ">
+    <div className="w-full flex items-center justify-between h-[8vh]  bg-gray-800 pl-[10px] pr-[10px] border-b border-l border-gray-700">
       <img
         src={logos.atticaLogo}
         alt="logo"

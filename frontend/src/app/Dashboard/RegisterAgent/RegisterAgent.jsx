@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import { logos } from "../../constants";
+import { logos } from "../../../constants";
 // import { useEffect, useState } from "react";
 
 // import { useSelector } from "react-redux";
-import { useRegisterMutation } from "../../redux/api/usersApi";
+import { useRegisterMutation } from "../../../redux/api/usersApi";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
