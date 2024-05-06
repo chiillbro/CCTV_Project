@@ -5,15 +5,10 @@ import img4 from "../../assets/homepageicon/face_scanning.jpg";
 import img5 from "../../assets/homepageicon/register.png";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
-import './Dashboard.css'
-// import { useNavigate } from "react-router";
+import './dashboard.css'
 
 const Dashboard = () => {
-  // const navigate = useNavigate();
-
-  // const handleClick = () => {
-  //   navigate("/dashboard/crm");
-  // };
+  
   return (
     <div className="h-screen w-screen">
       <Navbar />
