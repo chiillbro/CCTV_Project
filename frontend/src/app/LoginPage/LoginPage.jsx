@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router";
-
 import { useSelector, useDispatch } from "react-redux";
 import { logos } from "../../constants";
 import { useEffect, useState } from "react";
@@ -36,7 +35,7 @@ const LoginPage = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate(redirect);
+      navigate("/dashboard");
       toast.success("Login successful");
     } catch (error) {
       console.log(error);

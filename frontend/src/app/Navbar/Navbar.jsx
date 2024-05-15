@@ -1,10 +1,10 @@
 import { FaUser } from "react-icons/fa";
 import { logos } from "../../constants";
 import { AiOutlineLogout } from "react-icons/ai";
-import { useNavigate } from "react-router";
+import {Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApi";
-import { logout } from "../../redux/features/auth/authSlice";
+import { logout } from "../../redux/features/auth/authSlice"
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -30,7 +30,12 @@ const Navbar = () => {
         className="w-[8vw] object-contain "
       />
       <div className="flex gap-10 mr-[10vw]">
-        <FaUser className="text-2xl cursor-pointer hover:-translate-y-1 transition-all" />
+        <Link
+          to="/profile"
+        >
+          <FaUser className="text-2xl cursor-pointer hover:-translate-y-1 transition-all" />
+        </Link>
+
         <AiOutlineLogout
           onClick={handleLogout}
           className="text-2xl cursor-pointer hover:-translate-y-1 transition-all"
