@@ -35,7 +35,7 @@ const DeviceList = () => {
             <td className="py-3 px-4">No</td>
             <td className="py-3 px-4">Name</td>
             <td className="py-3 px-4">State</td>
-            <td className="py-3 px-4">Type</td>
+            <td className="py-3 px-4">branch</td>
             <td className="py-3 px-4">IP/Domain Name</td>
             <td className="py-3 px-4">Device Model</td>
             <td className="py-3 px-4">Port</td>
@@ -52,7 +52,7 @@ const DeviceList = () => {
                 <td className="py-3 px-4">{device.no}</td>
                 <td className="py-3 px-4">{device.deviceName}</td>
                 <td className="py-3 px-4">{device.state}</td>
-                <td className="py-3 px-4">{device.type}</td>
+                <td className="py-3 px-4">{device.branch}</td>
                 <td className="py-3 px-4">{device.ip}</td>
                 <td className="py-3 px-4">{device.model}</td>
                 <td className="py-3 px-4">{device.port}</td>
