@@ -1,41 +1,50 @@
-import DeviceDetails from "./DeviceDetails";
+import React from 'react'
+import Navbar from '../../Navbar/Navbar'
+import DeviceDetails from '../Live_Stream/deviceList/DeviceDetails';
 import { FaEye } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
-const DeviceList = () => {
-
+const Location = () => {
+  const [state, setState] = React.useState('')
   return (
-    <div className="flex flex-col gap-[10px] w-full m-[30px] p-[20px]rounded-md text-gray-300">
-      <span>Device List</span>
-      <div className="bg-gray-800">
-        <div className="flex justify-between items-center m-5">
-          <div>
-            <input type="text" placeholder="Search"  className="w-full rounded-md p-2" />
-          </div>
-          <div className="flex gap-10">
-            <select name="state" id="" className="bg-black hover:bg-transparent  font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">
-              <option value="">state </option>
-              <option value="karnataka">KA</option>
-              <option value="andrapradesha">AP</option>
-              <option value="tamilnadu">TN</option>
-              <option value="kerala">KE</option>
+    <div className='h-screen w-screen'>
+      <Navbar />
+      <div className='flex flex-col items-center gap-[50px]'>
+        <form
+          className='flex justify-around items-center w-[70vw] h-[50px] bg-gray-800 rounded-md p-[10px] mt-10  border-gray-700 border-b-[1px] gap-[50px]'
+        >
+          <div className='flex justify-between items-center gap-[50px]'>
+            <select
+              name=""
+              id="state"
+              onClick={(e) => setState(e.target.value)}
+              className="bg-white h-[31px] rounded-md text-gray-500 pr-[10px]"
+            >
+              <option value="">Select a state</option>
+              <option value="KA">KA</option>
+              <option value="KA">TL</option>
+              <option value="KA">AP</option>
+              <option value="KA">TN</option>
             </select>
-            <button className="bg-black hover:bg-transparent font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">
-              Add +
-            </button>
-            <button className="flex items-center gap-[5px] bg-black hover:bg-transparent font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">Delete <MdDeleteOutline /></button>
+            <input
+              type="text"
+              placeholder='branch code'
+              className="w-[200px] pl-[10px] bg-white p-[3px] rounded-md text-gray-600"
+            />
           </div>
-
-        </div>
-        <table className="w-full border-collapse flex-col text-sm">
+          <button className="bg-black hover:bg-transparent font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">
+            Add +
+          </button>
+        </form>
+        <table className=" border-collapse flex-col text-sm bg-gray-800 w-[80vw] rounded-md">
 
           <tr className="bg-[#44484C] ">
             <td className="py-3 px-4"><input type="checkbox" /></td>
             <td className="py-3 px-4">No</td>
             <td className="py-3 px-4">Name</td>
             <td className="py-3 px-4">State</td>
-            <td className="py-3 px-4">branch</td>
+            <td className="py-3 px-4">Branch</td>
             <td className="py-3 px-4">IP/Domain Name</td>
             <td className="py-3 px-4">Device Model</td>
             <td className="py-3 px-4">Port</td>
@@ -68,10 +77,9 @@ const DeviceList = () => {
           ))}
 
         </table>
-
       </div>
     </div>
   )
 }
 
-export default DeviceList;
+export default Location

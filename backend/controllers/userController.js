@@ -6,15 +6,15 @@ import generateToken from "../utils/generateToken.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 
 export const Register = asyncHandler(async (req, res) => {
-  const errors = validationResult(req);
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  const { email, username, employeeId,state, password, confirmPassword } = req.body;
 
-  const { email, username, employeeId, password, confirmPassword } = req.body;
 
-  if (!email || !username || !employeeId || !password || !confirmPassword) {
+  if (!email || !username || !employeeId || !password || !confirmPassword || !state) {
     throw new Error("Please fill all the fields");
   }
 
@@ -36,12 +36,13 @@ export const Register = asyncHandler(async (req, res) => {
     email,
     username,
     employeeId,
+    state,
     password: hashedPassword,
   });
 
   try {
     await newUser.save();
-    // generateToken(newUser._id, res);
+    generateToken(newUser._id, res);
 
     res.status(201).json({ newUser });
   } catch (error) {
@@ -64,7 +65,12 @@ export const Login = asyncHandler(async (req, res) => {
     if (isPasswordValid) {
       generateToken(existingUser._id, res);
 
-      res.status(200).json({ existingUser });
+      res.status(201).json({
+        _id: existingUser._id,
+        username: existingUser.username,
+        email: existingUser.email,
+        isAdmin: existingUser.isAdmin,
+      });
     } else {
       res.status(401).json({ message: "Invalid Password" });
     }
@@ -73,10 +79,31 @@ export const Login = asyncHandler(async (req, res) => {
   }
 });
 
-export const Logout = asyncHandler(async (rea, res) => {
+export const Logout = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
     expires: new Date(0),
   });
   res.status(200).json({ message: "Logged out successfully!" });
+});
+
+export const getCurrentUserProfile = asyncHandler(async (req,res)=>{
+  const user = await User.findById(req.user._id)
+  if(user){
+    res.json({
+      _id: user._id,
+      username: user.username,
+      employeeId: user.employeeId,
+      email: user.email,
+      isAdmin: user.isAdmin
+    })
+  }else{
+    res.status(404)
+    throw new Error("User not found")
+  }
+})
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
 });

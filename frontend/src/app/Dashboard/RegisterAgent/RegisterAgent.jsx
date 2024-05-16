@@ -11,6 +11,7 @@ const RegisterAgent = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [employeeId, setEmployeeId] = useState("");
+  const [state, setState] = useState("")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -38,6 +39,7 @@ const RegisterAgent = () => {
           email,
           username,
           employeeId,
+          state,
           password,
           confirmPassword,
         });
@@ -61,7 +63,7 @@ const RegisterAgent = () => {
         />
       </div>
       <div className="h-[80vh] w-[20vw] ml-[30vw] flex gap-6 flex-col ">
-        <h1 className=" text-2xl">Register</h1>
+        <h1 className=" text-2xl">Agent Registration</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full">
           <div className="w-full flex flex-col gap-2">
@@ -72,7 +74,7 @@ const RegisterAgent = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               // placeholder="Enter your email"
-              className="w-full  rounded-md p-2 text-black"
+              className="w-full  rounded-md p-2 text-black bg-white"
             />
           </div>
           <div className="w-full flex flex-col gap-2">
@@ -83,7 +85,7 @@ const RegisterAgent = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               // placeholder="Enter your username"
-              className="w-full  rounded-md p-2 text-black"
+              className="w-full  rounded-md p-2 text-black bg-white"
             />
           </div>
           <div className="w-full flex flex-col gap-2">
@@ -94,8 +96,26 @@ const RegisterAgent = () => {
               value={employeeId}
               onChange={(e) => setEmployeeId(e.target.value)}
               // placeholder="Enter your employeeId"
-              className="w-full  rounded-md p-2 text-black"
+              className="w-full  rounded-md p-2 text-black bg-white"
             />
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <label htmlFor="password">State</label>
+            <select
+              className="w-full rounded-md p-2 text-black bg-white"
+              name=""
+              id="state"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              required
+            >
+              <option value="">Select a state</option>
+              <option value="KA">Karnataka</option>
+              <option value="TN">Tamilnadu</option>
+              <option value="AP">Andhra Pradesh</option>
+              <option value="TN">Telangana</option>
+              <option value="KE">Kerala</option>
+            </select>
           </div>
           <div className="w-full flex flex-col gap-2">
             <label htmlFor="password">Password</label>
@@ -105,7 +125,7 @@ const RegisterAgent = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               // placeholder="Enter your Password"
-              className="w-full rounded-md p-2 text-black"
+              className="w-full rounded-md p-2 text-black bg-white"
             />
           </div>
           <div className="w-full flex flex-col gap-2">
@@ -116,7 +136,7 @@ const RegisterAgent = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               // placeholder="Re-enter your Password"
-              className="w-full rounded-md p-2 text-black"
+              className="w-full rounded-md p-2 text-black bg-white"
             />
           </div>
 
