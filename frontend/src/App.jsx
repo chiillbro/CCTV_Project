@@ -15,6 +15,7 @@ import AdminRoutes from "./app/Admin/AdminRoutes";
 import Profile from "./app/user/Profile";
 import Location from "./app/Dashboard/Location/Location";
 import UserList from "./app/Dashboard/UserList/UserList";
+import AddDevice from "./app/Dashboard/AddDevice/AddDevice";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
               <Route path="register" element={<RegisterAgent />} />
             </Route>
             <Route path="/dashboard/location" element={<Location />} />
-            <Route path="/dashboard/live-stream" element={<LiveViewLayout />} >
+            <Route path="/dashboard/live-stream" element={<LiveViewLayout />}>
               <Route index element={<Home />} />
               <Route path="devices" element={<DeviceList />} />
               <Route path="stream" element={<LiveStream />} />
@@ -41,13 +42,18 @@ const App = () => {
             {/* Admin Routes */}
             <Route path='/admin' element={<AdminRoutes />}>
               <Route path='./database/userlist' element='' />
-            </Route>
-          </Route>
+              <Route
+                path="/admin/dashboard/add-device"
+                element={<AddDevice />}
+              />
 
+            </Route>
+            <Route path="/dashboard/register" element={<RegisterAgent />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
   );
 };
 
-export default App
+export default App;
