@@ -14,6 +14,7 @@ import AuthRequired from "./app/Authentication/AuthRequired";
 import AdminRoutes from "./app/Admin/AdminRoutes";
 import Profile from "./app/user/Profile";
 import Location from "./app/Dashboard/Location/Location";
+import UserList from "./app/Dashboard/UserList/UserList";
 import AddDevice from "./app/Dashboard/AddDevice/AddDevice";
 
 const App = () => {
@@ -27,21 +28,27 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard/crm" element={<Crm />} />
+            <Route path="/dashboard/userlist" >
+              <Route index element={<UserList />} />
+              <Route path="register" element={<RegisterAgent />} />
+            </Route>
             <Route path="/dashboard/location" element={<Location />} />
             <Route path="/dashboard/live-stream" element={<LiveViewLayout />}>
               <Route index element={<Home />} />
               <Route path="devices" element={<DeviceList />} />
               <Route path="stream" element={<LiveStream />} />
             </Route>
-            <Route path="/dashboard/register" element={<RegisterAgent />} />
+
             {/* Admin Routes */}
-            <Route path="/admin" element={<AdminRoutes />}>
-              <Route path="./database/userlist" element="" />
+            <Route path='/admin' element={<AdminRoutes />}>
+              <Route path='./database/userlist' element='' />
               <Route
                 path="/admin/dashboard/add-device"
                 element={<AddDevice />}
               />
+
             </Route>
+            <Route path="/dashboard/register" element={<RegisterAgent />} />
           </Route>
         </Routes>
       </BrowserRouter>

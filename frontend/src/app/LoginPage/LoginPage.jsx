@@ -35,10 +35,9 @@ const LoginPage = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/dashboard");
       toast.success("Login successful");
+      navigate("/dashboard");
     } catch (error) {
-      console.log(error);
       toast.error(error.data?.message || error.message);
     }
   };
@@ -70,7 +69,7 @@ const LoginPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full  rounded-md p-2 text-black"
+              className="w-full  rounded-md p-2 bg-gray-700 text-white"
             />
           </div>
           <div className="w-full flex flex-col gap-2">
@@ -81,11 +80,14 @@ const LoginPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your Password"
-              className="w-full rounded-md p-2 text-black"
+              className="w-full rounded-md p-2  bg-gray-700 text-white"
             />
           </div>
 
-          <button className="btn btn-neutral mt-6">
+          <button 
+          className="btn btn-neutral mt-6"
+          type="submit"
+          >
             {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>

@@ -16,11 +16,10 @@ const Dashboard = () => {
       <Navbar />
       <div className="flex items-center justify-center mt-[15vh] ">
         <div
-          className={`${
-            !userInfo.isAdmin
+          className={`${!userInfo.isAdmin
               ? "grid grid-cols-2"
               : " parent grid md: grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 "
-          } justify-items-center gap-20 width-full h-full`}
+            } justify-items-center gap-20 width-full h-full`}
         >
           <Link to="/dashboard/live-stream" className="child">
             <img src={img2} alt="Live Stream" className="rounded-md" />
@@ -41,18 +40,18 @@ const Dashboard = () => {
                 <img src={img3} alt="Database" className="rounded-md" />
                 <span className="">Database</span>
               </Link>
-              <Link to="/dashboard/register" className="child">
-                <img src={img5} alt="Agent Reg." className="rounded-md" />
-                <span className="">Agent Reg.</span>
-              </Link>
+              <Link to="/dashboard/userlist" className="child">
+                <img src={img5} alt="Agents List" className="rounded-md" />
+                <span className="">Agents List</span>
+              </Link >
               <Link to="/dashboard/location" className="child">
                 <img src={img5} alt="Location" className="rounded-md" />
                 <span className="">Location</span>
-              </Link>
-              <Link to="/admin/dashboard/add-device" className="child">
+              </Link >
+              <Link to="/dashboard/add-device" className="child">
                 <img src={img5} alt="Add Device" className="rounded-md" />
                 <span className="">Add Device</span>
-              </Link>
+              </Link >
             </>
           )}
         </div>
