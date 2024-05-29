@@ -14,6 +14,7 @@ import AuthRequired from "./app/Authentication/AuthRequired";
 import AdminRoutes from "./app/Admin/AdminRoutes";
 import Profile from "./app/user/Profile";
 import Location from "./app/Dashboard/Location/Location";
+import UserList from "./app/Dashboard/UserList/UserList";
 
 const App = () => {
   return (
@@ -24,18 +25,22 @@ const App = () => {
           <Route path="/" element={<LoginPage />} />
           <Route element={<AuthRequired />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard/crm" element={<Crm />} />
+            <Route path="/dashboard/userlist" >
+              <Route index element={<UserList />} />
+              <Route path="register" element={<RegisterAgent />} />
+            </Route>
             <Route path="/dashboard/location" element={<Location />} />
             <Route path="/dashboard/live-stream" element={<LiveViewLayout />} >
               <Route index element={<Home />} />
               <Route path="devices" element={<DeviceList />} />
               <Route path="stream" element={<LiveStream />} />
             </Route>
-            <Route path="/register" element={<RegisterAgent />} />
+
             {/* Admin Routes */}
-            <Route path='/admin' element={<AdminRoutes/>}>
-              <Route path='./database/userlist' element=''/>
+            <Route path='/admin' element={<AdminRoutes />}>
+              <Route path='./database/userlist' element='' />
             </Route>
           </Route>
 

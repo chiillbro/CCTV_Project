@@ -41,9 +41,9 @@ const RegisterAgent = () => {
           employeeId,
           state,
           password,
-          confirmPassword,
-        });
-        navigate("/dashboard");
+          confirmPassword
+        }).unwrap()
+        navigate("/dashboard/userlist");
         toast.success("Registration successful");
       } catch (error) {
         console.log(error);

@@ -12,8 +12,6 @@ export const Register = asyncHandler(async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   const { email, username, employeeId,state, password, confirmPassword } = req.body;
-
-
   if (!email || !username || !employeeId || !password || !confirmPassword || !state) {
     throw new Error("Please fill all the fields");
   }
@@ -42,8 +40,6 @@ export const Register = asyncHandler(async (req, res) => {
 
   try {
     await newUser.save();
-    generateToken(newUser._id, res);
-
     res.status(201).json({ newUser });
   } catch (error) {
     console.log(error.message);
@@ -63,7 +59,7 @@ export const Login = asyncHandler(async (req, res) => {
     );
 
     if (isPasswordValid) {
-      generateToken(existingUser._id, res);
+      generateToken(res,existingUser._id);
 
       res.status(201).json({
         _id: existingUser._id,
@@ -107,3 +103,51 @@ export const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
+
+export const deleteUserById = asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id)
+  
+  if(user){
+    if(user.isAdmin){
+      res.status(400)
+      throw new Error("Cannot delete admin user")
+    }
+    await User.deleteOne({_id:user._id})
+    res.json({messge:"User deleted successfully"})
+  }else{
+    res.status(404)
+    throw new Error("User not found")
+  }
+})
+
+export const getUserById = asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params._id);
+  if(user){
+    res.json(user)
+  }else{
+    res.status(404)
+    throw new Error("User not found")
+  }
+})
+
+export const updateUserById = asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id)
+  if(user){
+    user.username = req.body.username || user.username
+    user.email= req.body.email || user.email
+    user.employeeId = req.body.employeeId || user.employeeId
+    user.state = req.params.state || user.state
+    user.password = req.body.password || user.password
+
+    const updatedUser = await user.save(user)
+    res.json({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  }else{
+    res.status(404)
+    throw new Error("User not found")
+  }
+})

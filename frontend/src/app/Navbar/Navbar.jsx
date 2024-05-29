@@ -1,7 +1,7 @@
 import { FaUser } from "react-icons/fa";
 import { logos } from "../../constants";
 import { AiOutlineLogout } from "react-icons/ai";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApi";
 import { logout } from "../../redux/features/auth/authSlice"
@@ -24,18 +24,21 @@ const Navbar = () => {
 
   return (
     <div className="w-full flex items-center justify-between h-[8vh]  bg-gray-800 pl-[10px] pr-[10px] border-b border-l border-gray-700">
-      <img
-        src={logos.atticaLogo}
-        alt="logo"
-        className="w-[8vw] object-contain "
-      />
+      <Link
+        to='/dashboard'
+      >
+        <img
+          src={logos.atticaLogo}
+          alt="logo"
+          className="w-[8vw] object-contain "
+        />
+      </Link>
       <div className="flex gap-10 mr-[10vw]">
         <Link
           to="/profile"
         >
           <FaUser className="text-2xl cursor-pointer hover:-translate-y-1 transition-all" />
         </Link>
-
         <AiOutlineLogout
           onClick={handleLogout}
           className="text-2xl cursor-pointer hover:-translate-y-1 transition-all"

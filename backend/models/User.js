@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema(
     employeeId: {
       type: String,
       required: true,
-
       unique: true,
     },
     state:{
@@ -30,6 +29,7 @@ const userSchema = new mongoose.Schema(
     },
     isAdmin: {
       type: Boolean,
+      required:true,
       default: false,
     },
   },
@@ -38,6 +38,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model("Users", userSchema);
+const User = mongoose.model('User', userSchema)
 
 export default User;

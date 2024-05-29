@@ -39,9 +39,9 @@ const Dashboard = () => {
               <img src={img3} alt="Database" className="rounded-md" />
               <span className="">Database</span>
             </Link>
-            <Link to="/dashboard/register" className="child">
-              <img src={img5} alt="Agent Reg." className="rounded-md" />
-              <span className="">Agent Reg.</span>
+            <Link to="/dashboard/userlist" className="child">
+              <img src={img5} alt="Agents List" className="rounded-md" />
+              <span className="">Agents List</span>
             </Link >
             <Link to="/dashboard/location" className="child">
               <img src={img5} alt="Location" className="rounded-md" />
