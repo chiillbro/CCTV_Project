@@ -6,7 +6,6 @@ import img5 from "../../assets/homepageicon/register.png";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./dashboard.css";
 
 const Dashboard = () => {
   const { userInfo } = useSelector((state) => state.auth);
