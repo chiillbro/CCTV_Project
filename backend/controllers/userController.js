@@ -11,8 +11,8 @@ export const Register = asyncHandler(async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { email, username, employeeId,state, password, confirmPassword } = req.body;
-  if (!email || !username || !employeeId || !password || !confirmPassword || !state) {
+  const { email, username, employeeId, state, designation, password, confirmPassword } = req.body;
+  if (!email || !username || !employeeId || !password || !confirmPassword || !state || !designation) {
     throw new Error("Please fill all the fields");
   }
 
@@ -35,6 +35,7 @@ export const Register = asyncHandler(async (req, res) => {
     username,
     employeeId,
     state,
+    designation,
     password: hashedPassword,
   });
 
@@ -59,13 +60,15 @@ export const Login = asyncHandler(async (req, res) => {
     );
 
     if (isPasswordValid) {
-      generateToken(res,existingUser._id);
+
+      generateToken(res, existingUser._id);
 
       res.status(201).json({
         _id: existingUser._id,
         username: existingUser.username,
         email: existingUser.email,
         isAdmin: existingUser.isAdmin,
+        designation: existingUser.designation
       });
     } else {
       res.status(401).json({ message: "Invalid Password" });
@@ -83,58 +86,68 @@ export const Logout = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Logged out successfully!" });
 });
 
-export const getCurrentUserProfile = asyncHandler(async (req,res)=>{
+export const getCurrentUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
-  if(user){
+  if (user) {
     res.json({
       _id: user._id,
       username: user.username,
       employeeId: user.employeeId,
       email: user.email,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      designation: user.designation
     })
-  }else{
+  } else {
     res.status(404)
     throw new Error("User not found")
   }
+})
+
+export const getUsersForAgent = asyncHandler(async (req, res) => {
+ try{
+  const subAgents = await User.find({state: req.user.state});
+  res.json({subAgents})
+ }catch(error){
+  res.status(500).json({message:"Server Error"})
+ }
 })
 
 export const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
-});
+})
 
-export const deleteUserById = asyncHandler(async(req,res)=>{
+export const deleteUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
-  
-  if(user){
-    if(user.isAdmin){
+
+  if (user) {
+    if (user.isAdmin) {
       res.status(400)
       throw new Error("Cannot delete admin user")
     }
-    await User.deleteOne({_id:user._id})
-    res.json({messge:"User deleted successfully"})
-  }else{
+    await User.deleteOne({ _id: user._id })
+    res.json({ messge: "User deleted successfully" })
+  } else {
     res.status(404)
     throw new Error("User not found")
   }
 })
 
-export const getUserById = asyncHandler(async(req,res)=>{
+export const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params._id);
-  if(user){
+  if (user) {
     res.json(user)
-  }else{
+  } else {
     res.status(404)
     throw new Error("User not found")
   }
 })
 
-export const updateUserById = asyncHandler(async(req,res)=>{
+export const updateUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
-  if(user){
+  if (user) {
     user.username = req.body.username || user.username
-    user.email= req.body.email || user.email
+    user.email = req.body.email || user.email
     user.employeeId = req.body.employeeId || user.employeeId
     user.state = req.params.state || user.state
     user.password = req.body.password || user.password
@@ -146,7 +159,7 @@ export const updateUserById = asyncHandler(async(req,res)=>{
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
     });
-  }else{
+  } else {
     res.status(404)
     throw new Error("User not found")
   }

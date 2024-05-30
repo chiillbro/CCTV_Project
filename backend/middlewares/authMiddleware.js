@@ -30,4 +30,11 @@ const authorizeAdmin = (req, res, next) => {
   }
 }
 
-export { authenticate, authorizeAdmin }
+const authorizeAgent = (req, res, next) => {
+  if (req.user && req.user.designation === 'agent') {
+    next()
+  } else {
+    res.status(401).send("Not authorized as an agent")
+  }
+}
+export { authenticate, authorizeAdmin, authorizeAgent }

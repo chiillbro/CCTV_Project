@@ -12,6 +12,7 @@ const RegisterAgent = () => {
   const [username, setUsername] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [state, setState] = useState("")
+  const [designation, setDesignation] = useState("")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -40,6 +41,7 @@ const RegisterAgent = () => {
           username,
           employeeId,
           state,
+          designation,
           password,
           confirmPassword
         }).unwrap()
@@ -99,8 +101,9 @@ const RegisterAgent = () => {
               className="w-full  rounded-md p-2 text-black bg-white"
             />
           </div>
+          <div className="flex justify-center gap-4 ">
           <div className="w-full flex flex-col gap-2">
-            <label htmlFor="password">State</label>
+            <label htmlFor="state">State</label>
             <select
               className="w-full rounded-md p-2 text-black bg-white"
               name=""
@@ -116,6 +119,23 @@ const RegisterAgent = () => {
               <option value="TN">Telangana</option>
               <option value="KE">Kerala</option>
             </select>
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <label htmlFor="designation">Designation</label>
+            <select
+              className="w-full rounded-md p-2 text-black bg-white"
+              name=""
+              id="designation"
+              value={designation}
+              onChange={(e) => setDesignation(e.target.value)}
+              required
+            >
+              <option value="">Select a designation</option>
+              <option value="agent">Agent</option>
+              <option value="subAgent">Sub Agent</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
           </div>
           <div className="w-full flex flex-col gap-2">
             <label htmlFor="password">Password</label>
