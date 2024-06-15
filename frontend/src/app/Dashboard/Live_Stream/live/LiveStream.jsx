@@ -52,7 +52,7 @@ const LiveStream = () => {
         .map((url, index) => (
           <div
             key={index}
-            className="bg-gray-700 text-white border border-gray-700 rounded-md p-[5px] m-[5px]"
+            className="bg-gray-700 text-white border border-gray-700 rounded-md p-[5px] m-[5px]" 
             onDoubleClick={() => setSelectedCamera(null)}
             style={{ position: 'relative', overflow: 'hidden' }}
           >

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from "react-redux"
 import {
   useGetAllUsersQuery,
   useDeleteUserMutation,
-  useUpdateUserMutation
+  useUpdateUserMutation,
+  useGetUsersForAgentQuery
 } from "../../../redux/api/usersApi.js";
 import { toast } from "react-toastify";
 import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
@@ -12,11 +14,12 @@ import Navbar from '../../Navbar/Navbar.jsx';
 import { Link } from 'react-router-dom';
 
 const UserList = () => {
-  const { data: users, refetch, isLoading, error } = useGetAllUsersQuery()
+  const { userInfo } = useSelector((state) => state.auth)
+  const queryHook = userInfo.isAdmin ? useGetAllUsersQuery : useGetUsersForAgentQuery;
+  const { data: users, refetch, isLoading, error } = queryHook();
+  console.log(users)
   const [deleteUser] = useDeleteUserMutation()
   const [updateUser] = useUpdateUserMutation()
-  
-  console.log(users)
 
   const [editableUserId, setEditableUserId] = useState(null)
   const [editableUserName, setEditableUserName] = useState("")
@@ -75,13 +78,14 @@ const UserList = () => {
       <Navbar />
       <div>
         <h1 className="text-2xl font-semibold ml-[100px]  my-[50px]">Agents Details</h1>
+        { userInfo.isAdmin &&
         <div className='flex w-[90vw] justify-end py-[10px]'>
           <Link
             to="register"
             className="bg-black hover:bg-transparent font-semibold py-2 px-7 border border-gray-400 hover:border-gray-400 rounded">
             Agent +
           </Link>
-        </div>
+        </div>}
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -100,7 +104,7 @@ const UserList = () => {
                   <th className="px-4 py-2 text-left">EMP ID</th>
                   <th className="px-4 py-2 text-left">STATE</th>
                   <th className="px-4 py-2 text-left">PASSWORD</th>
-                  <th className="px-4 py-2 text-left">ADMIN</th>
+                  <th className="px-4 py-2 text-left">DESIGNATION</th>
                   <th className="px-4 py-2"></th>
                 </tr>
               </thead>
@@ -254,11 +258,7 @@ const UserList = () => {
                       )}
                     </td>
                     <td className="px-4 py-2">
-                      {user.isAdmin ? (
-                        <FaCheck style={{ color: "green" }} />
-                      ) : (
-                        <FaTimes style={{ color: "red" }} />
-                      )}
+                      {user.designation}
                     </td>
                     <td className="px-4 py-2">
                       {!user.isAdmin && (

@@ -106,7 +106,7 @@ export const getCurrentUserProfile = asyncHandler(async (req, res) => {
 export const getUsersForAgent = asyncHandler(async (req, res) => {
  try{
   const subAgents = await User.find({state: req.user.state});
-  res.json({subAgents})
+  res.json(subAgents)
  }catch(error){
   res.status(500).json({message:"Server Error"})
  }
