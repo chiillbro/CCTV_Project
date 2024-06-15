@@ -2,8 +2,8 @@ import Device from "../models/deviceModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 
 const addDevice = asyncHandler(async (req, res) => {
-  const { deviceName, deviceModel, branchCode, state, api, isActive } = req.body;
-  if (!deviceName || !deviceModel || !branchCode || !state || !api || !isActive) {
+  const { deviceName, deviceModel, branchCode, state, api } = req.body;
+  if (!deviceName || !deviceModel || !branchCode || !state || !api) {
     throw new Error("Please fill all the details")
   }
 
@@ -12,7 +12,7 @@ const addDevice = asyncHandler(async (req, res) => {
     res.status(400).send("Device already exists")
   }
 
-  const newDevice = new Device({ deviceName, deviceModel, branchCode, state, api, isActive });
+  const newDevice = new Device({ deviceName, deviceModel, branchCode, state, api});
 
   try {
     await newDevice.save();
@@ -32,7 +32,7 @@ const addDevice = asyncHandler(async (req, res) => {
 
 const getAllDevices = asyncHandler(async (req, res) => {
   try {
-    const devices = await Device.find()
+    const devices = await Device.find({})
     res.json(devices)
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -59,7 +59,7 @@ const updateDevice = asyncHandler(async (req, res) => {
     device.branchCode = req.body.branchCode || device.branchCode
     device.state = req.body.state || device.state
     device.api = req.body.api || device.api
-    device.isActive = Boolean(req.body.isAdmin)
+    device.isActive = Boolean(req.body.isActive)
 
     const updatedDevice = await device.save()
 

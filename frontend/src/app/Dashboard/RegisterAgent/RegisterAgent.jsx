@@ -159,7 +159,7 @@ const RegisterAgent = () => {
               className="w-full rounded-md p-2 text-black bg-white"
             />
           </div>
-
+          
           <button className="btn btn-neutral mt-4">
             {isLoading ? "Registering..." : "Register"}
           </button>

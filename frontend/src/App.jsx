@@ -32,23 +32,15 @@ const App = () => {
               <Route index element={<UserList />} />
               <Route path="register" element={<RegisterAgent />} />
             </Route>
-            <Route path="/dashboard/location" element={<Location />} />
+            <Route path="/dashboard/devicelist" >
+              <Route index element={<Location />} />
+              <Route path="add-device" element={<AddDevice />} />
+            </Route>
             <Route path="/dashboard/live-stream" element={<LiveViewLayout />}>
               <Route index element={<Home />} />
               <Route path="devices" element={<DeviceList />} />
               <Route path="stream" element={<LiveStream />} />
             </Route>
-
-            {/* Admin Routes */}
-            <Route path='/admin' element={<AdminRoutes />}>
-              <Route path='./database/userlist' element='' />
-              <Route
-                path="/admin/dashboard/add-device"
-                element={<AddDevice />}
-              />
-
-            </Route>
-            <Route path="/dashboard/register" element={<RegisterAgent />} />
           </Route>
         </Routes>
       </BrowserRouter>

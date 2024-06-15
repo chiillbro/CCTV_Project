@@ -1,12 +1,16 @@
-import React from 'react'
 import Navbar from '../../Navbar/Navbar'
-import DeviceDetails from '../Live_Stream/deviceList/DeviceDetails';
 import { FaEye } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { useGetAllDevicesQuery } from '../../../redux/api/deviceApi';
+import { Link } from 'react-router-dom';
 
 const Location = () => {
-  const [state, setState] = React.useState('')
+  const { data: devices, error, isLoading } = useGetAllDevicesQuery();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log(devices)
   return (
     <div className='h-screen w-screen'>
       <Navbar />
@@ -18,7 +22,6 @@ const Location = () => {
             <select
               name=""
               id="state"
-              onClick={(e) => setState(e.target.value)}
               className="bg-white h-[31px] rounded-md text-gray-500 pr-[10px]"
             >
               <option value="">Select a state</option>
@@ -33,40 +36,34 @@ const Location = () => {
               className="w-[200px] pl-[10px] bg-white p-[3px] rounded-md text-gray-600"
             />
           </div>
-          <button className="bg-black hover:bg-transparent font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">
+          <Link to="add-device" className="bg-black hover:bg-transparent font-semibold py-1 px-5 border border-gray-400 hover:border-gray-400 rounded">
             Add +
-          </button>
+          </Link>
         </form>
         <table className=" border-collapse flex-col text-sm bg-gray-800 w-[80vw] rounded-md">
 
           <tr className="bg-[#44484C] ">
             <td className="py-3 px-4"><input type="checkbox" /></td>
-            <td className="py-3 px-4">No</td>
+            <td className="py-3 px-4">ID</td>
             <td className="py-3 px-4">Name</td>
             <td className="py-3 px-4">State</td>
             <td className="py-3 px-4">Branch</td>
-            <td className="py-3 px-4">IP/Domain Name</td>
             <td className="py-3 px-4">Device Model</td>
-            <td className="py-3 px-4">Port</td>
-            <td className="py-3 px-4">SN</td>
-            <td className="py-3 px-4">Online Status</td>
+            <td className="py-3 px-4">API</td>
             <td className="py-3 px-4">Actions</td>
           </tr>
 
 
-          {DeviceDetails.map((device, index) => (
+          {devices.map((device, index) => (
             <>
               <tr key={index} >
                 <td className="py-3 px-4"><input type="checkbox" /></td>
-                <td className="py-3 px-4">{device.no}</td>
+                <td className="py-3 px-4">{device._id}</td>
                 <td className="py-3 px-4">{device.deviceName}</td>
                 <td className="py-3 px-4">{device.state}</td>
-                <td className="py-3 px-4">{device.branch}</td>
-                <td className="py-3 px-4">{device.ip}</td>
-                <td className="py-3 px-4">{device.model}</td>
-                <td className="py-3 px-4">{device.port}</td>
-                <td className="py-3 px-4">{device.sn}</td>
-                <td className="py-3 px-4">{device.onlineStatus}</td>
+                <td className="py-3 px-4">{device.branchCode}</td>
+                <td className="py-3 px-4">{device.deviceModel}</td>
+                <td className="py-3 px-4">{device.api}</td>
                 <td className="py-3 px-4 flex">
                   <span className="mr-2 text-blue-500 cursor-pointer"><FaEye /></span>
                   <span className="mr-2 text-blue-500 cursor-pointer"><FaRegEdit /></span>

@@ -149,7 +149,7 @@ export const updateUserById = asyncHandler(async (req, res) => {
     user.username = req.body.username || user.username
     user.email = req.body.email || user.email
     user.employeeId = req.body.employeeId || user.employeeId
-    user.state = req.params.state || user.state
+    user.state = req.body.state || user.state
     user.password = req.body.password || user.password
 
     const updatedUser = await user.save(user)

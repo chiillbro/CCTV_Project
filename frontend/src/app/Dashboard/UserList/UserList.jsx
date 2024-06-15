@@ -1,45 +1,46 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 import {
   useGetAllUsersQuery,
   useDeleteUserMutation,
-  useUpdateUserMutation,
+  useUpdateUserMutation
 } from "../../../redux/api/usersApi.js";
 import { toast } from "react-toastify";
 import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
-import Message from "../../utils/Message.jsx";
-import Loader from "../../utils/Loader.jsx";
-import Navbar from "../../Navbar/Navbar.jsx";
-import { Link } from "react-router-dom";
+import Message from '../../utils/Message.jsx';
+import Loader from '../../utils/Loader.jsx';
+import Navbar from '../../Navbar/Navbar.jsx';
+import { Link } from 'react-router-dom';
 
 const UserList = () => {
-  const { data: users, refetch, isLoading, error } = useGetAllUsersQuery();
-  const [deleteUser] = useDeleteUserMutation();
-  const [updateUser] = useUpdateUserMutation();
+  const { data: users, refetch, isLoading, error } = useGetAllUsersQuery()
+  const [deleteUser] = useDeleteUserMutation()
+  const [updateUser] = useUpdateUserMutation()
+  
+  console.log(users)
 
-  console.log(users);
-
-  const [editableUserId, setEditableUserId] = useState(null);
-  const [editableUserName, setEditableUserName] = useState("");
-  const [editableUserEmail, setEditableUserEmail] = useState("");
-  const [editableUserEmployeeId, setEditableUserEmployeeId] = useState("");
-  const [editableUserState, setEditableUserState] = useState("");
-  const [editableUserPassword, setEditableUserPassword] = useState("");
+  const [editableUserId, setEditableUserId] = useState(null)
+  const [editableUserName, setEditableUserName] = useState("")
+  const [editableUserEmail, setEditableUserEmail] = useState("")
+  const [editableUserEmployeeId, setEditableUserEmployeeId] = useState("")
+  const [editableUserState, setEditableUserState] = useState("")
+  const [editableUserPassword, setEditableUserPassword] = useState("")
 
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    refetch()
+  }, [refetch])
 
   const deleteHandler = async (id) => {
+
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await deleteUser(id);
-        refetch();
-        toast.success("User deleted successfully");
+        await deleteUser(id)
+        refetch()
+        toast.success("User deleted successfully")
       } catch (err) {
-        toast.error(err.data?.message || err.error);
+        toast.error(err.data?.message || err.error)
       }
     }
-  };
+  }
 
   const toggleEdit = (id, username, email, employeeId, state, password) => {
     setEditableUserId(id);
@@ -59,28 +60,25 @@ const UserList = () => {
         employeeId: editableUserEmployeeId,
         state: editableUserState,
         password: editableUserPassword,
-      });
-      console.log(updateUser);
-      setEditableUserId(null);
-      refetch();
-      toast.success("User updated successfully");
+      })
+      console.log(updateUser)
+      setEditableUserId(null)
+      refetch()
+      toast.success("User updated successfully")
     } catch (err) {
-      toast.error(err.data?.message || err.error);
+      toast.error(err.data?.message || err.error)
     }
-  };
+  }
 
   return (
     <div className="h-screen w-screen ">
       <Navbar />
       <div>
-        <h1 className="text-2xl font-semibold ml-[100px]  my-[50px]">
-          Agents Details
-        </h1>
-        <div className="flex w-[90vw] justify-end py-[10px]">
+        <h1 className="text-2xl font-semibold ml-[100px]  my-[50px]">Agents Details</h1>
+        <div className='flex w-[90vw] justify-end py-[10px]'>
           <Link
             to="register"
-            className="bg-black hover:bg-transparent font-semibold py-2 px-7 border border-gray-400 hover:border-gray-400 rounded"
-          >
+            className="bg-black hover:bg-transparent font-semibold py-2 px-7 border border-gray-400 hover:border-gray-400 rounded">
             Agent +
           </Link>
         </div>
@@ -95,7 +93,7 @@ const UserList = () => {
             {/* <AdminMenu /> */}
             <table className="w-full md:w-4/5 mx-auto border border-gray-700  bg-gray-800">
               <thead>
-                <tr className="bg-gray-700">
+                <tr className='bg-gray-700'>
                   <th className="px-4 py-2 text-left">ID</th>
                   <th className="px-4 py-2 text-left">AGENT NAME</th>
                   <th className="px-4 py-2 text-left">EMAIL</th>
@@ -116,9 +114,7 @@ const UserList = () => {
                           <input
                             type="text"
                             value={editableUserName}
-                            onChange={(e) =>
-                              setEditableUserName(e.target.value)
-                            }
+                            onChange={(e) => setEditableUserName(e.target.value)}
                             className="w-full p-2 border rounded-lg"
                           />
                           <button
@@ -133,14 +129,7 @@ const UserList = () => {
                           {user.username}{" "}
                           <button
                             onClick={() =>
-                              toggleEdit(
-                                user._id,
-                                user.username,
-                                user.email,
-                                user.employeeId,
-                                user.state,
-                                user.password
-                              )
+                              toggleEdit(user._id, user.username, user.email, user.employeeId, user.state, user.password)
                             }
                           >
                             <FaEdit className="ml-[1rem]" />
@@ -154,9 +143,7 @@ const UserList = () => {
                           <input
                             type="text"
                             value={editableUserEmail}
-                            onChange={(e) =>
-                              setEditableUserEmail(e.target.value)
-                            }
+                            onChange={(e) => setEditableUserEmail(e.target.value)}
                             className="w-full p-2 border rounded-lg"
                           />
                           <button
@@ -171,14 +158,7 @@ const UserList = () => {
                           <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
                           <button
                             onClick={() =>
-                              toggleEdit(
-                                user._id,
-                                user.name,
-                                user.email,
-                                user.employeeId,
-                                user.state,
-                                user.password
-                              )
+                              toggleEdit(user._id, user.name, user.email, user.employeeId, user.state, user.password)
                             }
                           >
                             <FaEdit className="ml-[1rem]" />
@@ -192,9 +172,7 @@ const UserList = () => {
                           <input
                             type="text"
                             value={editableUserEmployeeId}
-                            onChange={(e) =>
-                              setEditableUserEmployeeId(e.target.value)
-                            }
+                            onChange={(e) => setEditableUserEmployeeId(e.target.value)}
                             className="w-full p-2 border rounded-lg"
                           />
                           <button
@@ -206,19 +184,10 @@ const UserList = () => {
                         </div>
                       ) : (
                         <div className="flex items-center">
-                          <a href={`mailto:${user.employeeId}`}>
-                            {user.employeeId}
-                          </a>{" "}
+                          <a href={`mailto:${user.employeeId}`}>{user.employeeId}</a>{" "}
                           <button
                             onClick={() =>
-                              toggleEdit(
-                                user._id,
-                                user.name,
-                                user.email,
-                                user.employeeId,
-                                user.state,
-                                user.password
-                              )
+                              toggleEdit(user._id, user.name, user.email, user.employeeId, user.state, user.password)
                             }
                           >
                             <FaEdit className="ml-[1rem]" />
@@ -232,9 +201,7 @@ const UserList = () => {
                           <input
                             type="text"
                             value={editableUserState}
-                            onChange={(e) =>
-                              setEditableUserState(e.target.value)
-                            }
+                            onChange={(e) => setEditableUserState(e.target.value)}
                             className="w-full p-2 border rounded-lg"
                           />
                           <button
@@ -249,14 +216,7 @@ const UserList = () => {
                           <a href={`mailto:${user.state}`}>{user.state}</a>{" "}
                           <button
                             onClick={() =>
-                              toggleEdit(
-                                user._id,
-                                user.name,
-                                user.email,
-                                user.employeeId,
-                                user.state,
-                                user.password
-                              )
+                              toggleEdit(user._id, user.name, user.email, user.employeeId, user.state, user.password)
                             }
                           >
                             <FaEdit className="ml-[1rem]" />
@@ -270,9 +230,7 @@ const UserList = () => {
                           <input
                             type="text"
                             value={editableUserPassword}
-                            onChange={(e) =>
-                              setEditableUserPassword(e.target.value)
-                            }
+                            onChange={(e) => setEditableUserPassword(e.target.value)}
                             className="w-full p-2 border rounded-lg"
                           />
                           <button
@@ -284,19 +242,10 @@ const UserList = () => {
                         </div>
                       ) : (
                         <div className="flex items-center">
-                          <a href={`mailto:${user.Password}`}>
-                            {user.Password}
-                          </a>{" "}
+                          <a href={`mailto:${user.Password}`}>{user.Password}</a>{" "}
                           <button
                             onClick={() =>
-                              toggleEdit(
-                                user._id,
-                                user.name,
-                                user.email,
-                                user.employeeId,
-                                user.state,
-                                user.password
-                              )
+                              toggleEdit(user._id, user.name, user.email, user.employeeId, user.state, user.password)
                             }
                           >
                             <FaEdit className="ml-[1rem]" />
@@ -330,8 +279,9 @@ const UserList = () => {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
-export default UserList;
+
+export default UserList

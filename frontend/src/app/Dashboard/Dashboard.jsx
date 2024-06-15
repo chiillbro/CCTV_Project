@@ -29,7 +29,7 @@ const Dashboard = () => {
             <img src={img4} alt="Face Recognition" className="rounded-md" />
             <span className="">Face Recognition</span>
           </Link>
-          {userInfo && userInfo.isAdmin && (
+          {userInfo && (userInfo.isAdmin||userInfo.designation==='agent') && (
             <>
               <Link to="/dashboard/crm" className="child">
                 <img src={img1} alt="CRM" className="rounded-md" />
@@ -44,13 +44,9 @@ const Dashboard = () => {
                 <img src={img5} alt="Agents List" className="rounded-md" />
                 <span className="">Agents List</span>
               </Link >
-              <Link to="/dashboard/location" className="child">
+              <Link to="/dashboard/devicelist" className="child">
                 <img src={img5} alt="Location" className="rounded-md" />
-                <span className="">Location</span>
-              </Link >
-              <Link to="/dashboard/add-device" className="child">
-                <img src={img5} alt="Add Device" className="rounded-md" />
-                <span className="">Add Device</span>
+                <span className="">Device List</span>
               </Link >
             </>
           )}

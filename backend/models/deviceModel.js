@@ -23,7 +23,8 @@ const deviceSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    required :true
+    default : true,
+    required :true,
   }
 }, { timestamps: true })
 
